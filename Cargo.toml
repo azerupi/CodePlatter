@@ -1,0 +1,11 @@
+[package]
+name = "codeplatter"
+version = "0.0.1"
+authors = ["Mathieu David <mathieudavid@mathieudavid.org>"]
+
+[dependencies]
+tempdir = "0.3.4"
+hyper = "0.7.2"
+iron = "0.2.6"
+router = "0.1.0"
+rustc-serialize = "0.3.18"
