@@ -36,10 +36,24 @@ pub fn handle_rust(request: &mut Request) -> IronResult<Response> {
                      .unwrap_or_else(|e| { panic!("failed to compile: {}", e) });
 
     if !rustc.status.success() {
-        let err = String::from_utf8(rustc.stderr)
-                        .expect("Could not read output")
-                        .replace(tempdir.path().join("rust.rs").to_str().unwrap(), "");
+        let raw_err = String::from_utf8(rustc.stderr).unwrap();
+        let mut err = String::new();
 
+        let l = tempdir.path()
+                       .join("rust.rs")
+                       .to_str()
+                       .unwrap()
+                       .len();
+
+        for line in raw_err.lines() {
+            if line.len() > l {
+                err.push_str(&line.split_at(l).1);
+            } else {
+                err.push_str(&line);
+            }
+            err.push_str("\n");
+        }
+        
         return Ok(Response::with((status::Ok, err)))
     }
 

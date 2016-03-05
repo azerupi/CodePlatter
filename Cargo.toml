@@ -3,6 +3,7 @@ name = "codeplatter"
 version = "0.0.1"
 authors = ["Mathieu David <mathieudavid@mathieudavid.org>"]
 license = "MIT"
+repository = "https://github.com/azerupi/codeplatter"
 description = """
 codeplatter is a tool to compile code snippets for browser based presentations where you can make ajax requests"""
 
