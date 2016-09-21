@@ -23,16 +23,15 @@ impl AfterMiddleware for CORS {
 }
 
 fn main() {
-    println!("On 3000");
-
     let mut router = Router::new();
 
-    router.get("/", help::help);
-    router.post("/rust", compile::rust);
-    router.post("/cpp", compile::cpp);
+    router.get("/", help::help, "help");
+    router.post("/rust", compile::rust, "rust");
+    router.post("/cpp", compile::cpp, "cpp");
 
     let mut chain = Chain::new(router);
     chain.link_after(CORS);
 
+    println!("On 3000");
     Iron::new(chain).http("localhost:3000").unwrap();
 }
